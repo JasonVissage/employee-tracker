@@ -1,21 +1,21 @@
-INSERT INTO department 
+INSERT INTO department (dept_name)
 VALUES
-(1, 'HR'),
-(2, 'Customer Service'),
-(3, 'Sales'),
-(4,'IT');
+('HR'),
+('Customer Service'),
+('Sales'),
+('IT');
 
 
-INSERT INTO role
+INSERT INTO employee_role (title, salary, dept_id)
 VALUES
-(1, 65000, 'HR Manager'),
-(2, 42000, 'Customer Service Rep'),
-(3, 80000, 'Sales Rep'),
-(4, 115000, 'Software Engineer');
+('HR Manager', 65000, 1),
+('Customer Service Rep', 42000, 2),
+('Sales Rep', 80000, 3),
+('Software Engineer', 115000, 4);
 
-INSERT INTO employee
+INSERT INTO employee (first_name, last_name, role_id)
 VALUES
-(),
-(),
-(),
-();
+('John', 'Smith', 1),
+('Jane', 'Smith', 2),
+('Austin', 'Powers', 3),
+('James', 'Bond', 4);
