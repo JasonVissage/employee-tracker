@@ -1,3 +1,5 @@
+SOURCE db/schema.sql;
+
 INSERT INTO department (dept_name)
 VALUES
 ('HR'),
