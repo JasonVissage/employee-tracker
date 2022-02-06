@@ -115,4 +115,67 @@ addDept = () => {
 }
 
 
+addRole = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'newRole',
+            message: 'Name of Role?',
+            validate: (newOption) => {
+                if (newOption) {
+                    return true;
+                } else {
+                    console.log('Please enter a valid response.');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'newSalary',
+            message: 'Input new Salary.',
+            validate: (newOption) => {
+                if (newOption) {
+                    return true;
+                } else {
+                    console.log('Please enter a valid response.');
+                    return false;
+                }
+            }
+        }
+    ])
+    .then((optionResponse) => {
+        const parameters = [optionResponse.newRole, optionResponse.newSalary];
+        const newRoleSql = `SELECT dept_name, id FROM department`;
+
+        db.query(newRoleSql, (err, res) => {
+            if (err) throw err;
+            const dept = data.map(({ name, id }) => ({ name: dept_name, value: id }));
+
+            inquirer.prompt([
+                {
+                    type: 'list',
+                    name: 'dept',
+                    message: 'What dept is this role for?',
+                    choices: dept,
+                },
+            ])
+            .then((options) => {
+                const dept = options.dept;
+                parameters.push(dept);
+
+                const sql = 'INSERT INTO employee_role (title, salary, dept_id) VALUES (?, ?, ?';
+
+                db.query(sql, parameters, (err, res) => {
+                    if (err) throw err;
+                    console.log('The ' + optionResponse.newDept + ' role has been added');
+                viewRoles();
+                })
+            })
+        })
+
+    })
+}
+
+
 startProgram();
